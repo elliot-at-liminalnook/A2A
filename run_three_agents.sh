@@ -168,7 +168,7 @@ agent_directory_path = "./data/agent3_directory.json"
 EOF
 
 # Start Agent 1
-AGENT1_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 1 (listening on port 4200, connecting to 4201)...\n\" && CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent1_config.toml"
+AGENT1_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 1 (listening on port 4200, connecting to 4201)...\n\" && RUST_LOG=debug CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent1_config.toml"
 if [ "$TERMINAL" = "gnome-terminal" ]; then
     gnome-terminal --title="Agent 1 (Port 4200)" -- bash -c "$AGENT1_CMD" &
 elif [ "$TERMINAL" = "xterm" ]; then
@@ -193,7 +193,7 @@ fi
 sleep 1
 
 # Start Agent 2
-AGENT2_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 2 (listening on port 4201, connecting to 4200 and 4202)...\n\" && CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent2_config.toml"
+AGENT2_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 2 (listening on port 4201, connecting to 4200 and 4202)...\n\" && RUST_LOG=debug CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent2_config.toml"
 if [ "$TERMINAL" = "gnome-terminal" ]; then
     gnome-terminal --title="Agent 2 (Port 4201)" -- bash -c "$AGENT2_CMD" &
 elif [ "$TERMINAL" = "xterm" ]; then
@@ -217,7 +217,7 @@ fi
 sleep 1
 
 # Start Agent 3
-AGENT3_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 3 (listening on port 4202, connecting to 4201)...\n\" && CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent3_config.toml"
+AGENT3_CMD="cd \"$PROJECT_DIR\" && echo -e \"Starting Agent 3 (listening on port 4202, connecting to 4201)...\n\" && RUST_LOG=debug CLAUDE_API_KEY=$CLAUDE_API_KEY AUTO_LISTEN=true ./target/debug/bidirectional-agent agent3_config.toml"
 if [ "$TERMINAL" = "gnome-terminal" ]; then
     gnome-terminal --title="Agent 3 (Port 4202)" -- bash -c "$AGENT3_CMD" &
 elif [ "$TERMINAL" = "xterm" ]; then
@@ -241,6 +241,8 @@ echo "All agents started and listening on their respective ports:"
 echo "- Agent 1: Port 4200 (connecting to Agent 2 on port 4201)"
 echo "- Agent 2: Port 4201 (will connect to both Agent 1 on port 4200 and Agent 3 on port 4202)"
 echo "- Agent 3: Port 4202 (connecting to Agent 2 on port 4201)"
+echo
+echo "All agents are logging at DEBUG level for detailed debugging output"
 echo
 echo "Setup for Agent Discovery:"
 echo "1. First connect the agents to each other:"
