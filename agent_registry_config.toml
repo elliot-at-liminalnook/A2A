@@ -17,11 +17,11 @@ registry_path = "data/agent_registry.json"
 
 # Mode configuration
 [mode]
-# Enable REPL by default
+# Must be false to avoid stdin issues in test script
 repl = false
-# Auto-start server
+# Must be true to start server directly
 auto_listen = true
-# Log file for REPL interactions
+# Log file for server interactions
 repl_log_file = "logs/agent_registry_test.log"
 
 # Tool configuration (not used in registry-only mode, but required)
